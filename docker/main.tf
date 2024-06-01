@@ -1,11 +1,22 @@
+provider "aws" {
+  region = "us-east-2"
+}
+
+#CRIACAO-DO-REPOSITORIO
 resource "aws_ecr_repository" "my_ecr_repository" {
   name = "maistodos-repo"
 }
 
-resource "aws_ecs_task_definition" "my_task_definition" {
+#CRIACAO-DO-CLUSTER
+resource "aws_ecs_cluster" "my_cluster" {
+  name = "cluster_maistodos"
+}
+
+#CRIACAO-DO-TASK-DEFINITION
+resource "aws_ecs_task_definition" "my_task_maistodos" {
   family                   = "my-task-def"
   container_definitions    = jsonencode([{
-    name                    = "container-maistodos"
+    name                    = "maistodos-container"
     image                   = "${aws_ecr_repository.my_ecr_repository.repository_url}:1.0"
     essential               = true
     portMappings            = [{
@@ -18,4 +29,6 @@ resource "aws_ecs_task_definition" "my_task_definition" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
+  execution_role_arn       = "${aws_iam_role.ecsTaskExecutionRole.arn}"
+
 }
