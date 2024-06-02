@@ -1,3 +1,4 @@
+#CRIACAO DO SG
 resource "aws_security_group" "alb_security_group" {
   name_prefix = "alb-sg"
   vpc_id      = aws_vpc.maistodos_vpc.id

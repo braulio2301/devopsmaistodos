@@ -47,21 +47,8 @@ resource "aws_db_subnet_group" "maistodos" {
 }
 
 # Declaração do recurso aws_subnet.private
-resource "aws_subnet" "private" {
-  vpc_id            = "vpc-0119ebcc028e40dea"   # ID da sua VPC existente
-  cidr_block        = "10.0.0.0/24"    # Bloco CIDR da sub-rede
-  availability_zone = "us-east-2a"     # Zona de disponibilidade
-  depends_on = [aws_vpc.maistodos_vpc]
-
-
-  tags = {
-    Name = "PrivateSubnet"  # Nome da sub-rede
-  }
-}
-
-# Declaração do recurso aws_subnet.private
 resource "aws_subnet" "maistodos_subnet" {
-  vpc_id            = "vpc-0119ebcc028e40dea"   # ID da sua VPC existente
+  vpc_id            = "vpc-0119ebcc028e40dea"   # ID da VPC existente
   cidr_block        = "10.0.1.0/24"    # Bloco CIDR da sub-rede
   availability_zone = "us-east-2c"     # Zona de disponibilidade
   depends_on = [aws_vpc.maistodos_vpc]

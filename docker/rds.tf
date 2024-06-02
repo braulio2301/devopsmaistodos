@@ -1,3 +1,4 @@
+#CRIANDO O BANCO EM REDE DIFERENTE
 resource "aws_db_instance" "maistodos-db" {
   identifier            = "maistodos-db"
   allocated_storage     = 20
